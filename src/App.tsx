@@ -17,8 +17,6 @@ function App() {
 
     const [isMock, setIsMock] = useState(false);
 
-    const [carName, setCarName] = useState<string>("")
-
     return (
         <div>
             <Header/>
@@ -29,7 +27,7 @@ function App() {
                 <Row>
                     <Routes>
 						<Route path="/" element={<HomePage />} />
-                        <Route path="/cars/" element={<CarsListPage cars={cars} setCars={setCars} isMock={isMock} setIsMock={setIsMock} carName={carName} setCarName={setCarName}/>} />
+                        <Route path="/cars/" element={<CarsListPage cars={cars} setCars={setCars} isMock={isMock} setIsMock={setIsMock}/>} />
                         <Route path="/cars/:id" element={<CarPage selectedCar={selectedCar} setSelectedCar={setSelectedCar} isMock={isMock} setIsMock={setIsMock}/>} />
                     </Routes>
                 </Row>

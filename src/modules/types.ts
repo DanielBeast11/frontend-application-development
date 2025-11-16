@@ -8,3 +8,7 @@ export type T_Car =  {
     price: number
     license_plate: string
 }
+
+export type FilterState = {
+    carName: string
+}

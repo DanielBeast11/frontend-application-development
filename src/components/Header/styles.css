@@ -2,16 +2,11 @@
     background-color: var(--header-bg);
 }
 
-.nav-link, .navbar-brand{
+.nav-link, .navbar-brand {
     color: var(--header-color) !important;
-    white-space: normal !important;
 }
 
-.nav-link:hover, .navbar-brand:hover{
-    color: hsl(from var(--header-color) h s calc(l - 10)) !important;
-}
-
-.navbar .title {
-    display: flex !important;
-    align-items: center !important;
+.nav-link:hover, .navbar-brand:hover {
+    color: var(--header-color) !important;
+    opacity: 0.8;
 }

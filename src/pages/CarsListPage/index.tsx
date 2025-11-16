@@ -1,4 +1,5 @@
 import {Button, Col, Container, Form, Input, Row} from "reactstrap";
+import { useSelector, useDispatch } from 'react-redux'
 import {T_Car} from "src/modules/types.ts";
 import CarCard from "components/CarCard";
 import {CarMocks} from "src/modules/mocks.ts";
@@ -7,19 +8,21 @@ import * as React from "react";
 import "./styles.css"
 import NoCarsCartIcon from "../../assets/no-cars-cart-icon.png"
 import HasCarsCartIcon from "../../assets/cart-icon.png"
+import { setCarName } from "src/store/slices/filterSlice";
+import { RootState } from '../../store'
 
 type Props = {
     cars: T_Car[],
     setCars: React.Dispatch<React.SetStateAction<T_Car[]>>
     isMock: boolean,
     setIsMock: React.Dispatch<React.SetStateAction<boolean>>
-    carName: string,
-    setCarName: React.Dispatch<React.SetStateAction<string>>
 }
 
-const CarsListPage = ({cars, setCars, isMock, setIsMock, carName, setCarName}:Props) => {
+const CarsListPage = ({cars, setCars, isMock, setIsMock}:Props) => {
     const [carsCount, setCarsCount] = useState<number>(0);
-    
+    const dispatch = useDispatch();
+    const carName = useSelector((state: RootState) => state.filters.carName)
+
     const fetchData = async () => {
         try {
             const response = await fetch(`/api/cars/?car_name=${carName.toLowerCase()}`)
@@ -80,7 +83,7 @@ const CarsListPage = ({cars, setCars, isMock, setIsMock, carName, setCarName}:Pr
                     <Form onSubmit={handleSubmit}>
                         <Row>
                             <Col md="8">
-                                <Input value={carName} onChange={(e) => setCarName(e.target.value)} placeholder="Поиск..."></Input>
+                                <Input value={carName} onChange={(e) => dispatch(setCarName(e.target.value))} placeholder="Поиск..."></Input>
                             </Col>
                             <Col>
                                 <Button color="primary" className="w-100 search-btn">Поиск</Button>
@@ -91,7 +94,7 @@ const CarsListPage = ({cars, setCars, isMock, setIsMock, carName, setCarName}:Pr
             </Row>
             <Row>
                 {cars?.map(car => (
-                    <Col key={car.id} xs="4">
+                    <Col key={car.id} xs="12" sm="6" md="4" className="mb-4">
                         <CarCard car={car} isMock={isMock} />
                     </Col>
                 ))}
