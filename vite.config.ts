@@ -1,9 +1,12 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig, ConfigEnv } from 'vite'
+import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import mkcert from 'vite-plugin-mkcert'
+import fs from 'fs'
+import path from 'path'
 
-export default defineConfig(({ command }: ConfigEnv) => {
+export default defineConfig(({ command }) => {
   
     const base = command === 'build'
       ? '/frontend-application-development/' 
@@ -14,29 +17,33 @@ export default defineConfig(({ command }: ConfigEnv) => {
       plugins: [
         react(),
         tsconfigPaths(),
+        mkcert(),
         VitePWA({
           registerType: 'autoUpdate',
-          devOptions: { enabled: command === 'serve' },
+          devOptions: {
+            enabled: true,
+          },
           manifest: {
             name: "Расчет амортизации автомобилей",
             short_name: "Амортизация авто",
             description: "Приложение для расчета амортизации автомобилей логистической компании",
-            start_url: ".",
+            start_url: "/frontend-application-development/",
             display: "standalone",
             background_color: "#ffffff",
             theme_color: "#007bff",
+            orientation: "portrait-primary",
             icons: [
               {
-                src: "/icons/icon-192.png",
-                sizes: "192x192",
-                type: "image/png"
+                src: `${base}icons/icon-192.png`,
+                type: "image/png",
+                sizes: "192x192"
               },
               {
-                src: "/icons/icon-512.png", 
-                sizes: "512x512",
-                type: "image/png"
+                src: `${base}icons/icon-512.png`,
+                type: "image/png", 
+                sizes: "512x512"
               }
-            ]
+            ],
           }
         })
       ],
@@ -54,9 +61,6 @@ export default defineConfig(({ command }: ConfigEnv) => {
           }
         },
       },
-      build: {
-        outDir: 'dist',
-        sourcemap: false
-      }
     }
-})
+  }
+)
