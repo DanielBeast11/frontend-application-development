@@ -1,1 +1,0 @@
-# frontend-applicant-development
