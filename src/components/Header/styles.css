@@ -1,0 +1,12 @@
+.navbar {
+    background-color: var(--header-bg);
+}
+
+.nav-link, .navbar-brand {
+    color: var(--header-color) !important;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: var(--header-color) !important;
+    opacity: 0.8;
+}
