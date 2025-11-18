@@ -8,9 +8,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "types": [
-      "vite-plugin-pwa/client",
-      "vite-plugin-pwa/info.d.ts",
-      "vite-plugin-pwa/client.d.ts"
+      "vite-plugin-pwa/client"
     ],
 
     /* Bundler mode */
